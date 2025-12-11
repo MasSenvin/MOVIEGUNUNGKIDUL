@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Izin Internet (opsional untuk API atau online resources) -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,21 +14,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Movie">
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
+
+        <!-- SplashScreen sebagai halaman pertama -->
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <!-- LoginActivity -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+
+        <!-- DetailActivity (yang sering crash kalau tidak terdaftar) -->
+        <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
+
+        <!-- MovieScheduleActivity -->
+        <activity
+            android:name=".MovieScheduleActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
