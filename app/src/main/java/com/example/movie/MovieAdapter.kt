@@ -25,21 +25,25 @@ class MovieAdapter(private val movieList: List<Movie>) :
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movieList[position]
 
+        // tampil
         holder.tvJudul.text = movie.title
         holder.imgPoster.setImageResource(movie.imageResId)
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            val ctx = holder.itemView.context
+            val intent = Intent(ctx, DetailActivity::class.java)
 
-            // --- KIRIM DATA KE DETAIL ---
             intent.putExtra("JUDUL_FILM", movie.title)
-            intent.putExtra("YOUTUBE_ID", movie.youtubeId) // Kirim ID Youtube
+            intent.putExtra("POSTER", movie.imageResId)
+            intent.putExtra("GENRE", movie.genre)
+            intent.putExtra("DURASI", movie.duration)
+            intent.putExtra("SUTRADARA", movie.director)
+            intent.putExtra("RATING", movie.rating)
+            intent.putExtra("SINOPSIS", movie.synopsis)
 
-            holder.itemView.context.startActivity(intent)
+            ctx.startActivity(intent)
         }
     }
 
-    override fun getItemCount(): Int {
-        return movieList.size
-    }
+    override fun getItemCount(): Int = movieList.size
 }
