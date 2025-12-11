@@ -1,157 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
+    android:background="#333333"
+    android:padding="32dp"
     tools:context=".LoginActivity">
 
-    <ImageButton
-        android:id="@+id/button_kembali"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_arrow_back"
-        app:tint="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_akun"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AKUN"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/button_kembali"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/button_kembali" />
-
     <ImageView
-        android:id="@+id/icon_profile"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/ic_account"
-        app:tint="@color/light_grey_button"
+        android:id="@+id/iv_app_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/logo_movie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_akun" />
-
-    <Button
-        android:id="@+id/button_google"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/button_background_grey"
-        android:text="GOOGLE"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon_profile" />
-
-    <Button
-        android:id="@+id/button_facebook"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_background_grey"
-        android:text="FACEBOOK"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="@id/button_google"
-        app:layout_constraintStart_toStartOf="@id/button_google"
-        app:layout_constraintTop_toBottomOf="@id/button_google" />
-
-    <Button
-        android:id="@+id/button_x"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_background_grey"
-        android:text="X"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="@id/button_google"
-        app:layout_constraintStart_toStartOf="@id/button_google"
-        app:layout_constraintTop_toBottomOf="@id/button_facebook" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Logo Aplikasi" />
 
     <TextView
-        android:id="@+id/text_atau"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="ATAU"
-        android:textColor="@color/light_grey_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_x" />
-
-    <EditText
-        android:id="@+id/edit_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/button_background_grey"
-        android:hint="EMAIL"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        android:textColorHint="#8A8A8A"
-        app:layout_constraintEnd_toEndOf="@id/button_google"
-        app:layout_constraintStart_toStartOf="@id/button_google"
-        app:layout_constraintTop_toBottomOf="@id/text_atau" />
-
-    <EditText
-        android:id="@+id/edit_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_background_grey"
-        android:hint="KATA SANDI"
-        android:inputType="textPassword"
-        android:padding="12dp"
-        android:textColorHint="#8A8A8A"
-        app:layout_constraintEnd_toEndOf="@id/button_google"
-        app:layout_constraintStart_toStartOf="@id/button_google"
-        app:layout_constraintTop_toBottomOf="@id/edit_email" />
-
-    <TextView
-        android:id="@+id/text_lupa_sandi"
+        android:id="@+id/tv_title_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Lupa Kata Sandi?"
-        android:textColor="@color/light_grey_button"
-        app:layout_constraintEnd_toEndOf="@id/edit_password"
-        app:layout_constraintTop_toBottomOf="@id/edit_password" />
-
-    <Button
-        android:id="@+id/button_masuk"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/button_background_red"
-        android:text="MASUK"
+        android:text="MASUK KE AKUN"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@id/button_google"
-        app:layout_constraintStart_toStartOf="@id/button_google"
-        app:layout_constraintTop_toBottomOf="@id/text_lupa_sandi" />
+        android:textSize="28sp"
+        android:letterSpacing="0.05"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_app_logo" />
 
     <TextView
-        android:id="@+id/text_daftar"
+        android:id="@+id/tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Belum punya akun? Daftar Sekarang"
-        android:textColor="@color/light_grey_button"
+        android:text="Silakan masuk untuk melanjutkan"
+        android:textColor="#AAAAAA"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_masuk" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title_login" />
+
+
+    <EditText
+        android:id="@+id/et_login_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:padding="18dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#999999"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+
+    <EditText
+        android:id="@+id/et_login_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="18dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#999999"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_login_email" />
+
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Lupa Kata Sandi?"
+        android:textColor="#AAAAAA"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_login_password" />
+
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#7A49A8"
+        android:padding="16dp"
+        android:text="MASUK"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:translationZ="6dp"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
+
+    <TextView
+        android:id="@+id/tv_register_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Belum punya akun? Daftar Sekarang"
+        android:textColor="#AAAAAA"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3A3A3A"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:text="Pilih Seat"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvScreenArea"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="#606060"
+        android:gravity="center"
+        android:text="Screen Area"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <LinearLayout
+        android:id="@+id/seatLayoutContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvScreenArea">
+
+        <GridLayout
+            android:id="@+id/gridLayoutLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:layout_marginEnd="20dp"
+            android:rowCount="5">
+
+            <include layout="@layout/seat_button" android:id="@+id/seat_1" tools:text="1"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_2" tools:text="2"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_3" tools:text="3"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_4" tools:text="4"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_5" tools:text="5"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_6" tools:text="6"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_7" tools:text="7"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_8" tools:text="8"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_9" tools:text="9"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_10" tools:text="10"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_11" tools:text="11"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_12" tools:text="12"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_13" tools:text="13"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_14" tools:text="14"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_15" tools:text="15"/>
+        </GridLayout>
+
+        <GridLayout
+            android:id="@+id/gridLayoutRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:layout_marginStart="20dp"
+            android:rowCount="5">
+
+            <include layout="@layout/seat_button" android:id="@+id/seat_16" tools:text="16"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_17" tools:text="17"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_18" tools:text="18"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_19" tools:text="19"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_20" tools:text="20"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_21" tools:text="21"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_22" tools:text="22"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_23" tools:text="23"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_24" tools:text="24"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_25" tools:text="25"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_26" tools:text="26"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_27" tools:text="27"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_28" tools:text="28"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_29" tools:text="29"/>
+            <include layout="@layout/seat_button" android:id="@+id/seat_30" tools:text="30"/>
+        </GridLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/legendLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seatLayoutContainer">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/bg_seat_available"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Masih (Tersedia)"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/bg_seat_unavailable"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diambil (Terisi)"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnLanjut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FF6347"
+        android:padding="16dp"
+        android:text="Lanjut"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
