@@ -1,5 +1,6 @@
 package com.example.movie
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -46,21 +47,16 @@ class DetailActivity : AppCompatActivity() {
         tvRating.text = "Rating: $rating"
         tvSinopsis.text = sinopsis
 
-        // Default: Schedule tampil, Sinopsis tersembunyi
+        // Default: Jadwal disembunyikan, Sinopsis tersembunyi
         tvSinopsis.visibility = View.GONE
-        layoutJadwal.visibility = View.VISIBLE
+        layoutJadwal.visibility = View.GONE
 
-        // Tombol SINOPSIS - toggle
         btnToggle.setOnClickListener {
             if (!showingSynopsis) {
-                // Tampilkan Sinopsis, sembunyikan jadwal
-                layoutJadwal.visibility = View.GONE
                 tvSinopsis.visibility = View.VISIBLE
                 btnToggle.text = "Tutup Sinopsis"
                 showingSynopsis = true
             } else {
-                // Tampilkan jadwal, sembunyikan sinopsis
-                layoutJadwal.visibility = View.VISIBLE
                 tvSinopsis.visibility = View.GONE
                 btnToggle.text = "Sinopsis"
                 showingSynopsis = false
@@ -70,7 +66,10 @@ class DetailActivity : AppCompatActivity() {
         btnBack.setOnClickListener { finish() }
 
         btnLanjut.setOnClickListener {
-            Toast.makeText(this, "Lanjut ditekan!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MovieScheduleActivity::class.java)
+            intent.putExtra("JUDUL_FILM", judul)
+            intent.putExtra("POSTER", poster)
+            startActivity(intent)
         }
     }
 }

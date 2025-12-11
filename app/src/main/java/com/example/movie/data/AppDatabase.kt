@@ -1,14 +1,21 @@
-package com.example.movie
+package com.example.movie.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [User::class], version = 1)
+@Database(
+    entities = [User::class, MovieEntity::class, ShowTime::class, Seat::class, Ticket::class],
+    version = 2
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun movieDao(): MovieDao
+    abstract fun showTimeDao(): ShowTimeDao
+    abstract fun seatDao(): SeatDao
+    abstract fun ticketDao(): TicketDao
 
     companion object {
         @Volatile
@@ -20,7 +27,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "movie.db"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
+                    .build()
                 INSTANCE = instance
                 instance
             }

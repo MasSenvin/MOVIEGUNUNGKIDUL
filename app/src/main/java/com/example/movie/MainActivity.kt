@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.movie.data.AppDatabase
+import com.example.movie.data.MovieEntity
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,62 +18,32 @@ class MainActivity : AppCompatActivity() {
         val rvMovies = findViewById<RecyclerView>(R.id.rv_movies)
         rvMovies.layoutManager = GridLayoutManager(this, 2)
 
-        val movieList = listOf(
-            Movie(
-                "Avengers: Endgame",
-                R.drawable.m1,
-                "Action, Adventure",
-                "3 jam 1 menit",
-                "Anthony & Joe Russo",
-                "13+",
-                "Avengers yang tersisa berusaha membalikkan dampak jentikan Thanos..."
-            ),
-            Movie(
-                "Spider-Man: No Way Home",
-                R.drawable.m2,
-                "Action",
-                "2 jam 28 menit",
-                "Jon Watts",
-                "13+",
-                "Identitas Peter terbongkar, membuka kekacauan multiverse..."
-            ),
-            Movie(
-                "Frozen II",
-                R.drawable.m3,
-                "Fantasy",
-                "1 jam 43 menit",
-                "Jennifer Lee, Chris Buck",
-                "SU",
-                "Elsa mendengar suara misterius yang memanggilnya dari hutan ajaib..."
-            ),
-            Movie(
-                "The Lion King",
-                R.drawable.m4,
-                "Animation, Adventure, Drama, Family",
-                "1 jam 58 menit",
-                "Jon Favreau",
-                "SU",
-                "Simba harus menghadapi masa lalunya dan kembali merebut Pride Rock..."
-            ),
-            Movie(
-                "Joker",
-                R.drawable.m5,
-                "Crime, Drama, Thriller",
-                "2 jam 2 menit",
-                "Todd Phillips",
-                "17+",
-                "Arthur Fleck jatuh ke jurang kegilaan hingga melahirkan Joker..."
-            ),
-            Movie(
-                "Toy Story 4",
-                R.drawable.m6,
-                "Animation, Comedy, Family",
-                "1 jam 40 menit",
-                "Josh Cooley",
-                "SU",
-                "Woody bertemu Bo Peep dan menemukan arti baru menjadi mainan..."
+        val db = AppDatabase.getDatabase(this)
+
+        if (db.movieDao().count() == 0) {
+            val initialMovies = listOf(
+                MovieEntity(title = "Avengers: Endgame", posterResId = R.drawable.m1, genre = "Action, Adventure", duration = "3 jam 1 menit", director = "Anthony & Joe Russo", rating = "13+", synopsis = "Avengers yang tersisa berusaha membalikkan dampak jentikan Thanos..."),
+                MovieEntity(title = "Spider-Man: No Way Home", posterResId = R.drawable.m2, genre = "Action", duration = "2 jam 28 menit", director = "Jon Watts", rating = "13+", synopsis = "Identitas Peter terbongkar, membuka kekacauan multiverse..."),
+                MovieEntity(title = "Frozen II", posterResId = R.drawable.m3, genre = "Fantasy", duration = "1 jam 43 menit", director = "Jennifer Lee, Chris Buck", rating = "SU", synopsis = "Elsa mendengar suara misterius yang memanggilnya dari hutan ajaib..."),
+                MovieEntity(title = "The Lion King", posterResId = R.drawable.m4, genre = "Animation, Adventure, Drama, Family", duration = "1 jam 58 menit", director = "Jon Favreau", rating = "SU", synopsis = "Simba harus menghadapi masa lalunya dan kembali merebut Pride Rock..."),
+                MovieEntity(title = "Joker", posterResId = R.drawable.m5, genre = "Crime, Drama, Thriller", duration = "2 jam 2 menit", director = "Todd Phillips", rating = "17+", synopsis = "Arthur Fleck jatuh ke jurang kegilaan hingga melahirkan Joker..."),
+                MovieEntity(title = "Toy Story 4", posterResId = R.drawable.m6, genre = "Animation, Comedy, Family", duration = "1 jam 40 menit", director = "Josh Cooley", rating = "SU", synopsis = "Woody bertemu Bo Peep dan menemukan arti baru menjadi mainan...")
             )
-        )
+            db.movieDao().insertAll(initialMovies)
+        }
+
+        val movieEntities = db.movieDao().getAll()
+        val movieList = movieEntities.map {
+            Movie(
+                title = it.title,
+                imageResId = it.posterResId,
+                genre = it.genre,
+                duration = it.duration,
+                director = it.director,
+                rating = it.rating,
+                synopsis = it.synopsis
+            )
+        }
 
         rvMovies.adapter = MovieAdapter(movieList)
 
@@ -80,7 +52,14 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_home -> true
                 R.id.nav_account -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    val userId = SessionManager.getUserId(this)
+                    if (userId == null) {
+                        val i = Intent(this, LoginActivity::class.java)
+                        i.putExtra("REDIRECT", "profile")
+                        startActivity(i)
+                    } else {
+                        startActivity(Intent(this, ProfileActivity::class.java))
+                    }
                     true
                 }
                 else -> false

@@ -81,10 +81,25 @@
         app:layout_constraintTop_toBottomOf="@id/btn_x" />
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/et_nama"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:hint="NAMA"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_separator" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_edittext_bg"
         android:hint="EMAIL"
         android:inputType="textEmailAddress"
@@ -93,7 +108,7 @@
         android:textColorHint="#999999"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_separator" />
+        app:layout_constraintTop_toBottomOf="@id/et_nama" />
 
     <EditText
         android:id="@+id/et_password"

@@ -1,12 +1,13 @@
-package com.example.movie
+package com.example.movie.data
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "users")
+@Entity(tableName = "users", indices = [Index(value = ["email"], unique = true)])
 data class User(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val email: String,
     val password: String,
-    val nama: String
+    val nama: String? = null
 )

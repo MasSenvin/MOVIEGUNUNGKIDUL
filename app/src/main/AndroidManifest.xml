@@ -35,6 +35,11 @@
             android:name=".LoginActivity"
             android:exported="false" />
 
+        <!-- RegisterActivity -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+
         <!-- DetailActivity (yang sering crash kalau tidak terdaftar) -->
         <activity
             android:name=".DetailActivity"
@@ -43,6 +48,18 @@
         <!-- MovieScheduleActivity -->
         <activity
             android:name=".MovieScheduleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".SeatSelectionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ProfileActivity"
             android:exported="false" />
 
     </application>

@@ -7,10 +7,13 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.movie.data.AppDatabase
+import com.example.movie.data.User
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var etEmail: EditText
+    private lateinit var etNama: EditText
     private lateinit var etPassword: EditText
     private lateinit var etConfirmPassword: EditText
     private lateinit var btnRegister: Button
@@ -22,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // Inisialisasi komponen
         etEmail = findViewById(R.id.et_email)
+        etNama = findViewById(R.id.et_nama)
         etPassword = findViewById(R.id.et_password)
         etConfirmPassword = findViewById(R.id.et_confirm_password)
         btnRegister = findViewById(R.id.btn_register)
@@ -42,10 +46,11 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun handleRegister() {
         val email = etEmail.text.toString().trim()
+        val nama = etNama.text.toString().trim()
         val password = etPassword.text.toString()
         val confirmPassword = etConfirmPassword.text.toString()
 
-        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || nama.isEmpty()) {
             Toast.makeText(this, "Mohon isi semua kolom!", Toast.LENGTH_SHORT).show()
             return
         }
@@ -56,13 +61,19 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        // --- Logika Pendaftaran ke Backend/Database di sini ---
+        val db = AppDatabase.getDatabase(this)
+        val existing = db.userDao().findByEmail(email)
+        if (existing != null) {
+            Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
+            return
+        }
 
+        val user = User(email = email, password = password, nama = nama)
+        db.userDao().insertUser(user)
         Toast.makeText(this, "Pendaftaran berhasil untuk: $email", Toast.LENGTH_LONG).show()
 
-        // Contoh: Pindah ke Home/Main Activity
-        // val intent = Intent(this, HomeActivity::class.java)
-        // startActivity(intent)
-        // finish()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

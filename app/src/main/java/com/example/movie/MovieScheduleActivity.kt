@@ -1,8 +1,13 @@
 package com.example.movie
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.movie.data.AppDatabase
+import com.example.movie.data.ShowTime
+import com.example.movie.data.Seat
+import com.example.movie.data.Ticket
 
 class MovieScheduleActivity : AppCompatActivity() {
 
@@ -32,9 +37,52 @@ class MovieScheduleActivity : AppCompatActivity() {
             if (selectedDate == null || selectedTime == null) {
                 Toast.makeText(this, "Pilih tanggal dan jam dulu ya", Toast.LENGTH_SHORT).show()
             } else {
-                val note = etDetail.text.toString()
-                val msg = "Film: $judul\nTanggal: $selectedDate\nJam: $selectedTime\nCatatan: $note"
-                Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+                val userId = SessionManager.getUserId(this)
+                if (userId == null) {
+                    Toast.makeText(this, "Silakan login dulu", Toast.LENGTH_SHORT).show()
+                    val i = Intent(this, LoginActivity::class.java)
+                    i.putExtra("REDIRECT", "seat")
+                    i.putExtra("MOVIE_TITLE", judul)
+                    i.putExtra("DATE", selectedDate!!)
+                    i.putExtra("TIME", selectedTime!!)
+                    startActivity(i)
+                    return@setOnClickListener
+                }
+
+                val db = AppDatabase.getDatabase(this)
+                val movie = judul?.let { db.movieDao().findByTitle(it) }
+                if (movie == null) {
+                    Toast.makeText(this, "Film tidak ditemukan di database", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val date = selectedDate!!
+                val time = selectedTime!!
+                var show = db.showTimeDao().findByMovieAndSlot(movie.id, date, time)
+                if (show == null) {
+                    val quota = 30
+                    val newId = db.showTimeDao().insert(ShowTime(movieId = movie.id, date = date, time = time, quota = quota, available = quota)).toInt()
+                    show = db.showTimeDao().findByMovieAndSlot(movie.id, date, time)
+                    if (show == null) {
+                        Toast.makeText(this, "Gagal membuat jadwal", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                    val seats = mutableListOf<Seat>()
+                    val rows = listOf('A','B','C','D','E')
+                    for (r in rows) {
+                        for (c in 1..6) {
+                            seats.add(Seat(showTimeId = newId, seatLabel = "$r$c"))
+                        }
+                    }
+                    db.seatDao().insertAll(seats)
+                }
+
+                val intent = Intent(this, SeatSelectionActivity::class.java)
+                intent.putExtra("SHOWTIME_ID", show.id)
+                intent.putExtra("MOVIE_TITLE", movie.title)
+                intent.putExtra("DATE", date)
+                intent.putExtra("TIME", time)
+                startActivity(intent)
             }
         }
 
@@ -46,6 +94,8 @@ class MovieScheduleActivity : AppCompatActivity() {
             R.id.btn_tgl1, R.id.btn_tgl2, R.id.btn_tgl3, R.id.btn_tgl4, R.id.btn_tgl5,
             R.id.btn_tgl6, R.id.btn_tgl7, R.id.btn_tgl8, R.id.btn_tgl9, R.id.btn_tgl10
         )
+
+        resetDateButtons(dateButtons)
 
         dateButtons.forEach { id ->
             val btn = findViewById<Button>(id)
@@ -62,6 +112,8 @@ class MovieScheduleActivity : AppCompatActivity() {
         val timeButtons = listOf(
             R.id.btn_jam1, R.id.btn_jam2, R.id.btn_jam3, R.id.btn_jam4
         )
+
+        resetTimeButtons(timeButtons)
 
         timeButtons.forEach { id ->
             val btn = findViewById<Button>(id)
